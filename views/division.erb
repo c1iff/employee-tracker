@@ -6,7 +6,7 @@
 
   <ul>
     <% @employees.each() do |employee| %>
-      <li><a href="/employees/<%= employee.id()%>"><%= employee.first_name() %> <%= employee.last_name() %></a> </li>
+      <li><a href="/employee/<%= employee.id()%>"><%= employee.first_name() %> <%= employee.last_name() %></a> </li>
     <% end %>
   </ul>
 
@@ -22,4 +22,18 @@
   <label for="last-name">Last Name</label>
   <input type="text" name="last-name"><br>
   <button type="submit">Add an employee</button>
+</form>
+
+
+<h2>Update Information</h2>
+<form class="form-control" action="/divisions/<%= @division.id() %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <label for="new-first-name">Enter a new division name:</label>
+  <input type="text" name="new-name" required>
+  <button type="submit">Update Division</button>
+</form>
+
+<form class="form-control" action="/divisions/<%= @division.id() %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <button type="submit">Delete Division</button>
 </form>

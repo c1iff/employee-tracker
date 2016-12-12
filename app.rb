@@ -11,10 +11,24 @@ get('/') do
   erb(:index)
 end
 
-get('/employee') do
-  @employees = Employee.all()
+get('/employee/:id') do
+  @employee = Employee.find(params['id'])
   erb(:employee)
 end
+
+patch('/employee/:id') do
+  @employee = Employee.find(params['id'])
+  @employee.update({:first_name => params['new-first-name'], :last_name => params['new-last-name']})
+  erb(:employee)
+end
+
+delete('/employee/:id') do
+  @employee = Employee.find(params['id'])
+  @employee.destroy()
+  @employees = Employee.all()
+  erb(:index)
+end
+
 
 get('/divisions') do
   @divisions = Division.all()
@@ -32,6 +46,20 @@ get('/divisions/:id') do
   @division = Division.find(params['id'])
   @employees = @division.employees
   erb(:division)
+end
+
+patch('/divisions/:id') do
+  @division = Division.find(params['id'])
+  @division.update({:name => params['new-name']})
+  @divisions = Division.all()
+  erb(:divisions)
+end
+
+delete('/divisions/:id') do
+  @division = Division.find(params['id'])
+  @division.destroy()
+  @divisions = Division.all()
+  erb(:divisions)
 end
 
 post('/divisions/:id') do

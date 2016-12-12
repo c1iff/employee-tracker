@@ -1,0 +1,23 @@
+<h1>Update/Delete Employee Information</h1>
+
+<h2>First: <%= @employee.first_name() %></h2><br>
+<h2>Last: <%= @employee.last_name() %></h2><br>
+<h2>Division:<%= @employee.division().name() %></h2>
+
+
+<h2>Update Information</h2>
+<form class="form-control" action="/employee/<%= @employee.id() %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <label for="new-first-name">Enter a new first name:</label>
+  <input type="text" name="new-first-name" required>
+  <label for="new-last-name">Enter a new last name:</label>
+  <input type="text" name="new-last-name" required>
+  <label for="division-new">Enter a new division:</label>
+  <input type="text" name="division-new">
+  <button type="submit">Update Employee</button>
+</form>
+
+<form class="form-control" action="/employee/<%= @employee.id() %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <button type="submit">Delete Employee</button>
+</form>
