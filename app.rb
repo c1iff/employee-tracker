@@ -4,6 +4,7 @@ require('sinatra/activerecord')
 also_reload("lib/**/*.rb")
 require("./lib/division")
 require("./lib/employee")
+require("./lib/project")
 require("pg")
 
 get('/') do
@@ -69,4 +70,27 @@ post('/divisions/:id') do
   employee_last = params['last-name']
   @division.employees().create({:first_name => employee_first, :last_name => employee_last})
   erb(:division)
+end
+
+get('/employee/:id/projects') do
+  @employee = Employee.find(params['id'])
+  @projects = @employee.projects()
+  erb(:projects)
+end
+
+post('/employee/:id/projects') do
+  @employee = Employee.find(params['id'])
+  new_project_name = params['new-project-name']
+  new_project_description = params['new-project-description']
+  @employee.projects().create({:name => new_project_name, :description => new_project_description})
+  @projects = @employee.projects()
+  erb(:projects)
+end
+
+delete('/employee/:id/projects') do
+  @employee = Employee.find(params['id'])
+  @project = Project.find(params['project-id'])
+  @project.destroy()
+  @projects = Project.all()
+  erb(:projects)
 end

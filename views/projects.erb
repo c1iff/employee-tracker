@@ -1,0 +1,29 @@
+<h1>The Current Projects</h1>
+
+<% if @projects.any?() %>
+  <h3>Here are your Divisions:</h3>
+
+    <% @projects.each() do |project| %>
+      <h3><%= project.name() %>:</h3> <p><%= project.description() %></p><br>
+      <form action="/employee/ <%= @employee.id %>/projects" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <input type="hidden" name="project-id" value="<%= project.id %>">
+        <button type="submit" name="button">Delete</button>
+      </form>
+
+    <% end %>
+
+<% else %>
+
+    <p>There are no projects left!</p>
+
+<% end %>
+
+<h3>Add a Project</h3>
+<form class="form-group" action="/employee/ <%= @employee.id %>/projects" method="post">
+  <label for="new-project-name">Enter a Project Name:</label>
+  <input type="text" name="new-project-name">
+  <label for="new-project-description">Enter the project's description:</label>
+  <input type="text" name="new-project-description">
+  <button type="submit">Add Project</button>
+</form>
