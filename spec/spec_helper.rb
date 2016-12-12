@@ -5,6 +5,7 @@ require("rspec")
 require("pg")
 require("division")
 require("employee")
+require('project')
 require("pry")
 
 
@@ -14,6 +15,9 @@ RSpec.configure do |config|
       each.destroy()
     end
     Employee.all.each() do |each|
+      each.destroy()
+    end
+    Project.all.each() do |each|
       each.destroy()
     end
   end
