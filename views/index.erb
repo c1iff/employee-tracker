@@ -1,4 +1,21 @@
 <h1>Welcome HR</h1>
 
+<h1>All Current Employees</h1>
+
+<% if @employees.any?() %>
+  <h3>Here are your Employees:</h3>
+
+  <ul>
+    <% @employees.each() do |employee| %>
+      <li><a href="/employees/<%= employee.id()%>"><%= employee.first_name() %> <%= employee.last_name() %></a> </li>
+    <% end %>
+  </ul>
+
+<% else %>
+
+    <p>There are no Employees yet!</p>
+
+<% end %>
+
+
 <a href="/divisions">View All Divisions</a>
-<a href="/employees">View All Employees</a>
